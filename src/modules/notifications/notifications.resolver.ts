@@ -37,4 +37,19 @@ export class NotificationsResolver {
   ): Promise<Notification> {
     return await this.notificationsService.update(updateNotificationInput);
   }
+  
+  @Mutation(() => Boolean, { name: 'removeNotification' })
+  async removeNotification(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<boolean> {
+    return await this.notificationsService.remove(id);
+  }
+
+  //seen notification
+  @Mutation(() => Boolean, { name: 'seenNotification' })
+  async seenNotification(
+    @Args('id', { type: () => Int }) id: number,
+  ): Promise<boolean> {
+    return await this.notificationsService.seenNotification(id);
+  }
 }
