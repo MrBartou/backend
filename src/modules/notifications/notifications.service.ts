@@ -55,4 +55,14 @@ export class NotificationsService {
     );
     return await this.findOne(updateNotificationInput.id);
   }
+
+  async remove(id: number): Promise<boolean> {
+    const result = await this.notificationRepository.delete(id);
+    return result.affected > 0;
+  }
+
+  async seenNotification(id: number): Promise<boolean> {
+    await this.notificationRepository.update(id, { is_read: true });
+    return true;
+  }
 }
